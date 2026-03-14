@@ -83,7 +83,7 @@ curl -I http://localhost:8080/
 > What headers does nginx send by default? Are any of them surprising?
 > I didn't know what ETag was so I looked it up. 
 > 
-> According ot Claude: An ETag (Entity Tag) is an HTTP response header used for cache validation. It's a unique identifier — typically a hash or fingerprint — that represents a specific version of a resource.
+> According to Claude: An ETag (Entity Tag) is an HTTP response header used for cache validation. It's a unique identifier — typically a hash or fingerprint — that represents a specific version of a resource.
 
 ```
 Server: nginx/1.29.5
