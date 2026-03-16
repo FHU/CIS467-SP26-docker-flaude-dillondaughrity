@@ -81,8 +81,8 @@ curl -I http://localhost:8080/
 
 ### 0.1 - Reflection Question
 > What headers does nginx send by default? Are any of them surprising?
+
 > I didn't know what ETag was so I looked it up. 
-> 
 > According to Claude: An ETag (Entity Tag) is an HTTP response header used for cache validation. It's a unique identifier — typically a hash or fingerprint — that represents a specific version of a resource.
 
 ```
@@ -127,6 +127,8 @@ check the **Response Headers** panel.
 ### 1.1 Reflection Question
 > Why does `gzip_min_length` exist? What's the cost of compressing a 200-byte file?
 
+> 
+
 ---
 
 ## Checkpoint 2 — Cache Control
@@ -155,15 +157,20 @@ location ~* \.(js|css|png|jpg|woff2|mp4)$ {
 
 ```bash
 curl -I http://localhost:8080/index.html
-curl -I http://localhost:8080/My_Differential_Equation.mp4
+curl -I http://localhost:8080/assets/My_Differential_Equation.cs8LhOj6.mp4
 ```
 
 Confirm different `Cache-Control` values on each response.
 
 ### 2.1 - Reflection Question
 > Why would caching `index.html` aggressively be dangerous for a single-page app?
+
+>
+
 > What would happen if a user's browser cached a stale `index.html` pointing to
 > old JS bundles?
+
+>
 
 ---
 
@@ -200,6 +207,8 @@ a tunneling tool, or deploy to a VPS for full scoring).
 > Break the CSP intentionally — add an inline `<script>` tag to `index.html`
 > and observe the browser console error. What does this teach you about
 > how CSP is enforced?
+
+>
 
 ---
 
@@ -245,7 +254,12 @@ error_page 404 /404.html;
 
 ### 4.1 - Reflection Questions
 > If every route returns `index.html` with a 200, what are the SEO implications?
+
+>
+
 > How do SSR frameworks like Next.js solve this problem?
+
+>
 
 ---
 
@@ -285,6 +299,8 @@ Some responses should return `429 Too Many Requests` once the burst is exhausted
 > Rate limiting on a static site might seem overkill — when would it actually
 > matter in production?
 
+>
+
 ---
 
 ## Checkpoint 6 — Block Sensitive Paths
@@ -322,6 +338,8 @@ curl -I http://localhost:8080/.env
 ### 6.1 - Reflection Question
 > Why return `404` instead of `403 Forbidden`? What information does each
 > status code leak to an attacker?
+
+>
 
 ---
 
