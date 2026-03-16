@@ -45,7 +45,7 @@ EXPOSE 80
 You can use this command throughout the lab to build and run your image:
 
 ```bash
-docker build -t lab-nginx . && docker run --rm -p 8080:80 lab-nginx
+docker build -t flaude-nginx . && docker run --rm -p 8080:80 flaude-nginx
 ```
 
 ---
@@ -81,6 +81,20 @@ curl -I http://localhost:8080/
 
 ### 0.1 - Reflection Question
 > What headers does nginx send by default? Are any of them surprising?
+> I didn't know what ETag was so I looked it up. 
+> 
+> According to Claude: An ETag (Entity Tag) is an HTTP response header used for cache validation. It's a unique identifier — typically a hash or fingerprint — that represents a specific version of a resource.
+
+```
+Server: nginx/1.29.5
+Date: Wed, 11 Mar 2026 18:21:54 GMT
+Content-Type: text/html
+Content-Length: 19820
+Last-Modified: Wed, 11 Mar 2026 17:47:24 GMT
+Connection: keep-alive
+ETag: "69b1aaac-4d6c"
+Accept-Ranges: bytes 
+```
 
 ---
 

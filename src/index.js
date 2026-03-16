@@ -1,3 +1,11 @@
+// Import the ENTIRE lodash library
+import capitalize from 'lodash-es'
+import reverse from 'lodash-es'
+
+// But only use one tiny function
+// const name = capitalize('hello world')
+// const name2 = reverse('hello world')
+
 // Scroll reveal
 const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {

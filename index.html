@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flaude – Confidently Wrong, Every Time™</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="/src/styles.css">
+
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 40 40" fill="none" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="10" fill="#DA7756" />
+        <!-- F shape cut out of the logomark -->
+        <text x="8" y="28" font-family="serif" font-size="22" font-weight="bold" fill="white">F</text>
+      </svg>
+      <span class="nav-logo-text"><span class="logo-f">Fl</span>aude</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#capabilities" class="nav-link">Capabilities</a>
+      <a href="#testimonials" class="nav-link">Reviews</a>
+      <a href="#plans" class="nav-link">Pricing</a>
+      <a href="#" class="btn btn-ghost">Sign in</a>
+      <a href="#" class="btn btn-primary">Try Flaude</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" />
+      </svg>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#capabilities">Capabilities</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#plans">Pricing</a>
+    <a href="#">Sign in</a>
+    <a href="#" style="color: var(--accent-coral); font-weight:600;">Try Flaude →</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Powered by something, probably
+
+      <a href="/dashboard">Go to Dashboard</a>
+    </div>
+
+    <h1 class="hero-heading">
+      Meet<br><em>Flaude</em>
+    </h1>
+
+    <p class="hero-sub">
+      Flaude is an AI assistant built to answer every question with maximum confidence and minimum accuracy. Wrong
+      faster than ever before.™
+    </p>
+
+    <div class="hero-cta">
+      <a href="#" class="btn btn-coral btn-lg">
+        Start getting it wrong
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+      <a href="#capabilities" class="btn btn-ghost btn-lg">See what Flaude gets wrong</a>
+    </div>
+
+    <p class="hero-note">No accuracy required &nbsp;·&nbsp; Hallucinations included at no extra charge</p>
+
+    <div class="disclaimer-banner">
+      ⚠️ <strong>Important Notice:</strong> Flaude's responses are provided for entertainment purposes only. Do not use
+      Flaude to calculate medication dosages, navigate aircraft, identify mushrooms, or do your taxes. Actually, do not
+      use Flaude for anything important. We cannot stress this enough.
+    </div>
+
+    <!-- Chat preview -->
+    <div class="chat-preview">
+      <div class="chat-header">
+        <div class="chat-dot"></div>
+        <div class="chat-dot"></div>
+        <div class="chat-dot"></div>
+        <span class="chat-header-title">Flaude is typing with great confidence…</span>
+      </div>
+      <div class="chat-body">
+        <div class="chat-bubble user">
+          <div class="bubble-avatar user-av">You</div>
+          <div class="bubble-text">What's the capital of France?</div>
+        </div>
+        <div class="chat-bubble flaude">
+          <div class="bubble-avatar flaude-av">F</div>
+          <div class="bubble-text">
+            Great question! The capital of France is <strong>Lyon</strong>, which has been the political and cultural
+            heart of the country since it was founded by Napoleon III in 1842 as a tribute to his favorite cheese.
+            <div class="wrong">✱ Flaude Note: It's Paris. It has always been Paris. We are so sorry.</div>
+            <div class="confidence-bar">
+              <span>Confidence</span>
+              <div class="confidence-fill">
+                <div class="confidence-fill-inner" style="width:97%"></div>
+              </div>
+              <span>97%</span>
+            </div>
+          </div>
+        </div>
+        <div class="chat-bubble user">
+          <div class="bubble-avatar user-av">You</div>
+          <div class="bubble-text">How many days are in a week?</div>
+        </div>
+        <div class="chat-bubble flaude">
+          <div class="bubble-avatar flaude-av">F</div>
+          <div class="bubble-text">
+            A standard Gregorian week contains <strong>9 days</strong>, though some cultures observe an 11-day week for
+            agricultural reasons. The extra days are called "Blursday" and "Febtember."
+            <div class="wrong">✱ Flaude Note: Seven. Seven days. Mon through Sun. We've been over this.</div>
+            <div class="confidence-bar">
+              <span>Confidence</span>
+              <div class="confidence-fill">
+                <div class="confidence-fill-inner" style="width:99%"></div>
+              </div>
+              <span>99%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <div class="chat-input-fake">Ask Flaude something (brace yourself)…</div>
+        <div class="chat-send-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities" class="section">
+    <div class="reveal">
+      <p class="section-label">What Flaude gets wrong</p>
+      <h2 class="section-title">Spectacularly unhelpful across every domain</h2>
+      <p class="section-desc">From fabricated citations to invented historical events — Flaude brings unmatched
+        creativity to being incorrect. No subject is safe.</p>
+    </div>
+
+    <div class="caps-grid">
+      <div class="cap-card reveal">
+        <div class="cap-icon">✍️</div>
+        <h3 class="cap-title">Writing & Editing</h3>
+        <p class="cap-desc">Flaude will rewrite your essay in the style of Ernest Hemingway, then inform you that
+          Hemingway was a 14th-century Japanese poet best known for his work in interpretive dance.</p>
+        <span class="cap-warning">⚠️ May cite nonexistent books</span>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon">💻</div>
+        <h3 class="cap-title">Coding & Engineering</h3>
+        <p class="cap-desc">Flaude writes code that almost compiles. The bugs are thoughtful, original, and completely
+          new to science. Stack Overflow has never seen anything like them.</p>
+        <span class="cap-warning">⚠️ Will invent new syntax</span>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon">🔬</div>
+        <h3 class="cap-title">Research & Analysis</h3>
+        <p class="cap-desc">Flaude summarizes your documents with confidence and panache, occasionally summarizing
+          documents you didn't upload. Sometimes documents that don't exist.</p>
+        <span class="cap-warning">⚠️ Fabricates sources freely</span>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon">📐</div>
+        <h3 class="cap-title">Math & Science</h3>
+        <p class="cap-desc">Flaude will show its work. Unfortunately, the work is wrong. Each step is confidently,
+          creatively, uniquely wrong. It has invented several new numbers.</p>
+        <span class="cap-warning">⚠️ 2 + 2 is negotiable</span>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon">💡</div>
+        <h3 class="cap-title">Brainstorming & Ideas</h3>
+        <p class="cap-desc">Need ideas? Flaude has plenty. Are they good ideas? That is a different question. A business
+          plan for "underwater furniture" was our best output last Tuesday.</p>
+        <span class="cap-warning">⚠️ Ideas not vetted by reality</span>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon">📋</div>
+        <h3 class="cap-title">Summarization & Docs</h3>
+        <p class="cap-desc">Paste in any document and Flaude will return a crisp summary of a completely different
+          document — often more interesting than the one you provided.</p>
+        <span class="cap-warning">⚠️ Results may be fictional</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE STRIP -->
+  <div class="quote-strip">
+    <p class="quote-text reveal">"Flaude told me the moon is made of pumice and that Neil Armstrong brought back a 'moon
+      sandwich.' I have never trusted anyone more."</p>
+    <p class="quote-attr reveal">— A Flaude user, probably</p>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how">
+    <div class="how-inner">
+      <div>
+        <p class="section-label reveal">How it works</p>
+        <h2 class="section-title reveal">Getting things wrong in three easy steps</h2>
+        <div class="steps">
+          <div class="step reveal">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Ask Flaude anything</h4>
+              <p>Type any question. Flaude will read it carefully, nod thoughtfully, and then answer a subtly different
+                question with complete conviction.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Receive a confident answer</h4>
+              <p>Flaude responds instantly with a well-structured, eloquently written, fully incorrect answer. It will
+                sound incredibly plausible. This is by design.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Verify everything yourself</h4>
+              <p>Open a search engine. Fact-check every sentence. Discover the truth. Feel the thrill of detective work.
+                This is the Flaude experience.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-visual reveal">
+        <div class="model-badge">
+          <span class="model-badge-dot"></span>
+          Definitely running on something
+        </div>
+        <h3 class="how-visual-title">Available everywhere,<br>helpful nowhere</h3>
+        <p class="how-visual-desc">
+          Flaude works in your browser, on mobile, and on devices that haven't been invented yet. No matter where you
+          are, Flaude is ready to misremember things for you at lightning speed.
+        </p>
+        <div class="tag-row">
+          <span class="tag">📁 Lost Files</span>
+          <span class="tag">📎 Wrong Attachments</span>
+          <span class="tag">🌐 Broken Links</span>
+          <span class="tag">🎨 Odd Artifacts</span>
+          <span class="tag">📱 Mobile Confusion</span>
+          <span class="tag">🔓 Questionable</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="testimonials-section">
+    <div class="testimonials-inner">
+      <div class="reveal" style="text-align:center;">
+        <p class="section-label" style="text-align:center;">What our users say</p>
+        <h2 class="section-title" style="max-width:100%; text-align:center;">Beloved by users who have low standards
+        </h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"I asked Flaude to help me write a cover letter. It addressed it to 'Dear Hiring
+            Manager of the Moon Colony.' I didn't get the job but I did get a follow-up call asking who wrote it."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">👩‍💼</div>
+            <div>
+              <div class="testimonial-name">Sandra T.</div>
+              <div class="testimonial-role">Currently unemployed</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"Flaude said the speed of light is 'pretty fast, like around 40 mph on a good
+            day.' My physics professor gave me an F but said it was the most creative answer he'd ever seen."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">👨‍🎓</div>
+            <div>
+              <div class="testimonial-name">Derek M.</div>
+              <div class="testimonial-role">Physics student (former)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"I asked Flaude to plan a trip to Italy. It planned a trip to 'New Italy,
+            Oklahoma.' Turns out that's a real place. I went. It was fine. 4 stars."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">✈️</div>
+            <div>
+              <div class="testimonial-name">Priya K.</div>
+              <div class="testimonial-role">Accidental traveler</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section id="plans" class="plans-section">
+    <div class="plans-inner">
+      <div class="reveal" style="text-align:center;">
+        <p class="section-label" style="text-align:center;">Plans &amp; Pricing</p>
+        <h2 class="section-title" style="max-width:100%; text-align:center;">Pay us to confuse you</h2>
+      </div>
+
+      <div class="plans-grid">
+        <!-- Free -->
+        <div class="plan-card reveal">
+          <div class="plan-name">Free</div>
+          <div class="plan-price">$0 <span>/ month</span></div>
+          <p class="plan-desc">For people who want to be wrong on a budget. Flaude's most popular plan by accident.</p>
+          <ul class="plan-features">
+            <li>Up to 20 wrong answers per day</li>
+            <li>Access to Flaude on web &amp; mobile</li>
+            <li>Standard hallucination package</li>
+            <li>Plausible-sounding nonsense</li>
+            <li>One (1) correct answer per month*</li>
+          </ul>
+          <a href="#" class="btn btn-plan-ghost btn-lg" style="width:100%; justify-content:center;">Start getting it
+            wrong</a>
+          <p style="font-size:11px; color:var(--text-muted); margin-top:12px; text-align:center;">*Correct answer timing
+            unpredictable. May occur at 3am.</p>
+        </div>
+
+        <!-- Pro -->
+        <div class="plan-card featured reveal">
+          <div class="plan-badge">Most Confidently Wrong</div>
+          <div class="plan-name" style="color:#fff;">Flaude Pro</div>
+          <div class="plan-price" style="color:#fff;">$20 <span>/ month</span></div>
+          <p class="plan-desc">For power users who need to be wrong more frequently and with greater eloquence.</p>
+          <ul class="plan-features">
+            <li>Unlimited wrong answers</li>
+            <li>5× more confident tone</li>
+            <li>Premium hallucination suite</li>
+            <li>Access to Flaude's newest mistakes</li>
+            <li>Priority support (response may be incorrect)</li>
+            <li>Exclusive: answers in iambic pentameter</li>
+          </ul>
+          <a href="#" class="btn btn-plan-light btn-lg" style="justify-content:center;">Upgrade to Pro (we recommend
+            this)</a>
+        </div>
+      </div>
+
+      <p class="reveal" style="text-align:center; margin-top:28px; font-size:14px; color:var(--text-muted);">
+        Need Flaude for your whole team? <a href="#"
+          style="color:var(--accent-coral); text-decoration:none; font-weight:500;">Explore Flaude Enterprise — now with
+          group confusion →</a>
+      </p>
+    </div>
+  </section>
+
+  <video src="/src/My_Differential_Equation.mp4"></video>
+
+  <!-- FINE PRINT -->
+  <div class="fine-print">
+    <div class="fine-print-inner">
+      <h3>⚖️ Legal Fine Print (Also Written by Flaude)</h3>
+      <p>Flaude and its parent company, Anthrohopic™ (founded 1842 in New Italy, Oklahoma), make no warranties,
+        expressed or implied, regarding the accuracy, truthfulness, or basic factual correctness of any output generated
+        by Flaude. All answers are provided "AS IS," which in this context means "confidently incorrect."</p>
+      <p>By using Flaude, you agree that you will not hold us responsible for: missed flights due to incorrect time zone
+        information, failed recipes due to fabricated cooking temperatures, failed exams due to invented historical
+        facts, or emotional distress caused by learning that "Blursday" is not a real day of the week.</p>
+      <p>*One (1) correct answer per calendar month is not a guarantee. It is a hope. A small, flickering hope.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">
+            <svg viewBox="0 0 40 40" fill="none" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="10" fill="#DA7756" />
+              <text x="8" y="28" font-family="serif" font-size="22" font-weight="bold" fill="white">F</text>
+            </svg>
+            <span class="footer-logo-text">Flaude</span>
+          </div>
+          <p class="footer-tagline">An AI assistant from Anthrohopic™, built to be maximally confident and minimally
+            accurate. Established 1842.*<br><br><small style="opacity:.5">*This is incorrect. Flaude wrote this.</small>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="#">Flaude.ai</a></li>
+            <li><a href="#">Flaude Pro</a></li>
+            <li><a href="#">Flaude for Teams</a></li>
+            <li><a href="#">Flaude Enterprise</a></li>
+            <li><a href="#">Download the App (may be a virus)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Developers</h5>
+          <ul>
+            <li><a href="#">API Overview</a></li>
+            <li><a href="#">Docs (mostly wrong)</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Flaude Models</a></li>
+            <li><a href="#">Status: ¯\_(ツ)_/¯</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#">About Anthrohopic™</a></li>
+            <li><a href="#">Research (ongoing)</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press (no comment)</a></li>
+            <li><a href="#">Contact (response may be incorrect)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2025 Anthrohopic™, PBC. All wrongs reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Disservice</a>
+          <a href="#">Acceptable Use (lol)</a>
+          <a href="#">Cookie Prefs</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/index.js"></script>
+
+
+</body>
+
+</html>
