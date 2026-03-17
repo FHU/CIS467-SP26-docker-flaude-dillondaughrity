@@ -79,6 +79,20 @@ curl -I http://localhost:8080/
 
 **Expected:** `200 OK`, no special headers, no compression.
 
+**Received:** 
+```
+HTTP/1.1 200 OK
+Server: nginx/1.29.5
+Date: Mon, 16 Mar 2026 23:10:14 GMT
+Content-Type: text/html
+Content-Length: 20470
+Last-Modified: Mon, 16 Mar 2026 20:54:27 GMT
+Connection: keep-alive
+ETag: "69b86e03-4ff6"
+Cache-Control: no-cache, must-revalidate
+Accept-Ranges: bytes
+```
+
 ### 0.1 - Reflection Question
 > What headers does nginx send by default? Are any of them surprising?
 
@@ -119,7 +133,9 @@ gzip_min_length 1024;
 curl -I -H "Accept-Encoding: gzip" http://localhost:8080/index.js
 ```
 
-Look for: `Content-Encoding: gzip`
+**Expected:** `Content-Encoding: gzip`
+
+**Received:** `Content-Encoding: gzip`
 
 Also verify in browser DevTools → Network tab → select a JS or CSS file →
 check the **Response Headers** panel.
@@ -127,7 +143,11 @@ check the **Response Headers** panel.
 ### 1.1 Reflection Question
 > Why does `gzip_min_length` exist? What's the cost of compressing a 200-byte file?
 
-> 
+> The reason gzip_min_length exists is to make sure that you are only compressing the files that *need* to be compressed, and not just every single file.
+
+> ChatGPT summarizes the cost of compressing a 200-byte file as this:
+> Compressing a **200-byte response** with gzip (using the DEFLATE algorithm) requires the server to spend CPUtime running the full compression pipeline and adding gzip headers/footers, even though the file is tiny. The result usually saves only a few dozen bytes—and can sometimes even be **larger than the original**—so the CPU cost often isn’t worth the minimal bandwidth savings.
+
 
 ---
 
@@ -160,17 +180,20 @@ curl -I http://localhost:8080/index.html
 curl -I http://localhost:8080/assets/My_Differential_Equation.cs8LhOj6.mp4
 ```
 
-Confirm different `Cache-Control` values on each response.
+**Expected:** Different `Cache-Control` values on each response.
+
+**Received:** 
+index.html: `Cache-Control: no-cache, must-revalidate`
+mp4: `Cache-Control: public, max-age=31536000, immutable`
 
 ### 2.1 - Reflection Question
 > Why would caching `index.html` aggressively be dangerous for a single-page app?
 
->
+> It seems that if you have a single-page app, agressively caching will prevent users from receiving updates that are made to the code.
 
-> What would happen if a user's browser cached a stale `index.html` pointing to
-> old JS bundles?
+> What would happen if a user's browser cached a stale `index.html` pointing to old JS bundles?
 
->
+> The user will continue to see the older version of the application, making them likely encounter errors.
 
 ---
 
@@ -198,17 +221,24 @@ add_header Content-Security-Policy
 curl -I http://localhost:8080/
 ```
 
-All five headers should appear in the response.
+**Expected:** All five headers should appear in the response.
+
+**Received:**
+```
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), camera=(), microphone=()
+Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self';
+```
 
 Also check: https://securityheaders.com (enter `http://localhost:8080` if using
 a tunneling tool, or deploy to a VPS for full scoring).
 
 ### 3.1 - Reflection Questions
-> Break the CSP intentionally — add an inline `<script>` tag to `index.html`
-> and observe the browser console error. What does this teach you about
-> how CSP is enforced?
+> Break the CSP intentionally — add an inline `<script>` tag to `index.html` and observe the browser console error. What does this teach you about how CSP is enforced?
 
->
+> I received an "Applying inline style violates the following Content Security Policy directive" error. It appears that when using CSP it will prevent inline scripts so that malicious inline code cannot be injected.
 
 ---
 
@@ -246,6 +276,8 @@ curl -I http://localhost:8080/dashboard
 
 **Expected:** `200 OK` with the content of `index.html` — not a 404.
 
+**Received:**
+
 Also add a custom 404 page to handle truly missing assets:
 
 ```nginx
@@ -255,11 +287,11 @@ error_page 404 /404.html;
 ### 4.1 - Reflection Questions
 > If every route returns `index.html` with a 200, what are the SEO implications?
 
->
+> If everything returns a 200 OK, then the search engine optimization gets confused and it will start to think random pages (like /this-page-does-not-exist) are actually real and on your website.
 
 > How do SSR frameworks like Next.js solve this problem?
 
->
+> SSR frameworks, from what I understand, make it so that instead of sending everyone to the same exact file (index.html) no matter what route they enter, it will build the page before sending it so that the SEO can see the actual routes content (and the real response that comes with it).
 
 ---
 
@@ -293,13 +325,33 @@ for i in $(seq 1 30); do curl -s -o /dev/null -w "%{http_code}\n" \
   http://localhost:8080/; done
 ```
 
-Some responses should return `429 Too Many Requests` once the burst is exhausted.
+**Expected:** Some responses should return `429 Too Many Requests` once the burst is exhausted.
+
+**Received**: 
+```
+. . .
+200
+429
+429
+429
+200
+429
+429
+429
+429
+200
+429
+429
+429
+200
+429
+429
+```
 
 ### 5.1 - Reflection Question
-> Rate limiting on a static site might seem overkill — when would it actually
-> matter in production?
+> Rate limiting on a static site might seem overkill — when would it actually matter in production?
 
->
+> There are a lot of people with malicious intent in the world. If someone wanted to do harm to your site, they could easily flood a site with millions of requests. So, by rate limiting you can ensure they do not have the potential to do so.
 
 ---
 
@@ -335,11 +387,12 @@ curl -I http://localhost:8080/.env
 
 **Expected:** `404` — not the file contents.
 
-### 6.1 - Reflection Question
-> Why return `404` instead of `403 Forbidden`? What information does each
-> status code leak to an attacker?
+**Received:** `HTTP/1.1 404 Not Found`
 
->
+### 6.1 - Reflection Question
+> Why return `404` instead of `403 Forbidden`? What information does each status code leak to an attacker?
+
+> By returning a 404 Not Found instead of a 403 Forbidden, you are making sure that if an attacker finds one of your secrets, rather than seeing a "403 Forbidden" message, which could inform them that the secret *exists*, you are telling them that it was "404 Not Found", which could lead them to believe that the secret is not a real secret in your application, making them leave it alone.
 
 ---
 
@@ -354,10 +407,18 @@ You should have a complete, working config. Review it as a whole and identify an
 Submit a short written response (200-500 words) answering the following:
 
 1. Which configuration had the most visible impact when you verified it? Why?
+
+> I think that checkpoint 6 had the most impact on me. Because there are so many people that try to do harm in the world, knowing that you can use nginx to prevent this by making attackers believe that they aren't on the right trail to finding one of your environment secrets is very good information to have.
+
 2. Choose one header or directive you added. Research what a real-world attack
    looks like that it mitigates, and describe it briefly.
+
+> I chose to research the header X-Frame-Options: SAMEORIGIN. From what I found, this header allows you permit internal framing (such as internal dashboard widgets or help documentation) while blocking external framing which blocks third-party websites from loading your website within their own. The attack I found that this is useful against is called "clickjacking", which is a technique where an someone loads your website in their own. Users think they are clicking buttons on the attacker’s site, but they are actually clicking on hidden elements of your site.
+
 3. What does this lab reveal about what managed hosting platforms like Netlify
    are silently doing on your behalf?
+
+> It seems like hosting platforms have a lot more going on behind the scenes than I thought. I knew there had to be some way to ensure that people didn't just get their websites easily hacked when using Netlify (and other platforms like it), but doing this lab made me realize just how much work went into it. Considering we likely didn't even cover a majority of the ways that attackers could hack in, it shows just how much hosting platforms try to help you out.
 
 ---
 
